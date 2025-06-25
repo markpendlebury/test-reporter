@@ -15,6 +15,7 @@ export interface ReportOptions {
   onlySummary: boolean
   useActionsSummary: boolean
   badgeTitle: string
+  title?: string
 }
 
 const defaultOptions: ReportOptions = {
@@ -101,6 +102,12 @@ function getByteLength(text: string): number {
 
 function renderReport(results: TestRunResult[], options: ReportOptions): string[] {
   const sections: string[] = []
+  
+  if (options.title) {
+    sections.push(`# ${options.title}`)
+    sections.push('')
+  }
+  
   const badge = getReportBadge(results, options)
   sections.push(badge)
 

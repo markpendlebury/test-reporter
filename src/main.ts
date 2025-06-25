@@ -165,11 +165,11 @@ class TestReporter {
       }
     }
 
-    const {listSuites, listTests, onlySummary, useActionsSummary, badgeTitle} = this
+    const {listSuites, listTests, onlySummary, useActionsSummary, badgeTitle, title} = this
 
     let baseUrl = ''
     if (this.useActionsSummary) {
-      const summary = getReport(results, {listSuites, listTests, baseUrl, onlySummary, useActionsSummary, badgeTitle})
+      const summary = getReport(results, {listSuites, listTests, baseUrl, onlySummary, useActionsSummary, badgeTitle, title})
 
       core.info('Summary content:')
       core.info(summary)
@@ -189,7 +189,7 @@ class TestReporter {
 
       core.info('Creating report summary')
       baseUrl = createResp.data.html_url as string
-      const summary = getReport(results, {listSuites, listTests, baseUrl, onlySummary, useActionsSummary, badgeTitle})
+      const summary = getReport(results, {listSuites, listTests, baseUrl, onlySummary, useActionsSummary, badgeTitle, title})
 
       core.info('Creating annotations')
       const annotations = getAnnotations(results, this.maxAnnotations)
