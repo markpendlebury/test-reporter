@@ -102,12 +102,6 @@ function getByteLength(text: string): number {
 
 function renderReport(results: TestRunResult[], options: ReportOptions): string[] {
   const sections: string[] = []
-  
-  if (options.title) {
-    sections.push(`# ${options.title}`)
-    sections.push('')
-  }
-  
   const badge = getReportBadge(results, options)
   sections.push(badge)
 
@@ -150,6 +144,12 @@ function getBadge(passed: number, failed: number, skipped: number, options: Repo
 
 function getTestRunsReport(testRuns: TestRunResult[], options: ReportOptions): string[] {
   const sections: string[] = []
+  
+  if (options.title) {
+    sections.push(`# ${options.title}`)
+    sections.push('')
+  }
+  
   const totalFailed = testRuns.reduce((sum, tr) => sum + tr.failed, 0)
   if (totalFailed === 0) {
     sections.push(`<details><summary>Expand for details</summary>`)
