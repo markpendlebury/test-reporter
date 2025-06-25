@@ -47,6 +47,7 @@ class TestReporter {
   readonly onlySummary = core.getInput('only-summary', {required: false}) === 'true'
   readonly useActionsSummary = core.getInput('use-actions-summary', {required: false}) === 'true'
   readonly badgeTitle = core.getInput('badge-title', {required: false})
+  readonly title = core.getInput('title', {required: false})
   readonly token = core.getInput('token', {required: true})
   readonly octokit: InstanceType<typeof GitHub>
   readonly context = getCheckRunContext()
@@ -180,7 +181,7 @@ class TestReporter {
         name,
         status: 'in_progress',
         output: {
-          title: name,
+          title: this.title || name,
           summary: ''
         },
         ...github.context.repo
@@ -207,7 +208,7 @@ class TestReporter {
         conclusion,
         status: 'completed',
         output: {
-          title: shortSummary,
+          title: this.title || shortSummary,
           summary,
           annotations
         },

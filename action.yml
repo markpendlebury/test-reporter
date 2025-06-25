@@ -85,6 +85,9 @@ inputs:
     description: Customize badge title
     required: false
     default: 'tests'
+  title:
+    description: Title for the test report
+    required: false
   token:
     description: GitHub Access Token
     required: false
