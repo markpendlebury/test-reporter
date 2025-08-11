@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
-import {TestExecutionResult, TestRunResult, TestSuiteResult} from '../test-results'
-import {Align, formatTime, Icon, link, table} from '../utils/markdown-utils'
-import {DEFAULT_LOCALE} from '../utils/node-utils'
-import {getFirstNonEmptyLine} from '../utils/parse-utils'
-import {slug} from '../utils/slugger'
+import { TestExecutionResult, TestRunResult, TestSuiteResult } from '../test-results'
+import { Align, formatTime, Icon, link, table } from '../utils/markdown-utils'
+import { DEFAULT_LOCALE } from '../utils/node-utils'
+import { getFirstNonEmptyLine } from '../utils/parse-utils'
+import { slug } from '../utils/slugger'
 
 const MAX_REPORT_LENGTH = 65535
 const MAX_ACTIONS_SUMMARY_LENGTH = 131072 // 1048576 soon
@@ -32,7 +32,7 @@ export function getReport(results: TestRunResult[], options: ReportOptions = def
 
   applySort(results)
 
-  const opts = {...options}
+  const opts = { ...options }
   let lines = renderReport(results, opts)
   let report = lines.join('\n')
 
@@ -144,12 +144,12 @@ function getBadge(passed: number, failed: number, skipped: number, options: Repo
 
 function getTestRunsReport(testRuns: TestRunResult[], options: ReportOptions): string[] {
   const sections: string[] = []
-  
+
   if (options.title) {
     sections.push(`# ${options.title}`)
     sections.push('')
   }
-  
+
   const totalFailed = testRuns.reduce((sum, tr) => sum + tr.failed, 0)
   if (totalFailed === 0) {
     sections.push(`<details><summary>Expand for details</summary>`)
@@ -181,9 +181,6 @@ function getTestRunsReport(testRuns: TestRunResult[], options: ReportOptions): s
     sections.push(...suitesReports)
   }
 
-  if (totalFailed === 0) {
-    sections.push(`</details>`)
-  }
   return sections
 }
 
@@ -276,12 +273,12 @@ function getTestsReport(ts: TestSuiteResult, runIndex: number, suiteIndex: numbe
   return sections
 }
 
-function makeRunSlug(runIndex: number): {id: string; link: string} {
+function makeRunSlug(runIndex: number): { id: string; link: string } {
   // use prefix to avoid slug conflicts after escaping the paths
   return slug(`r${runIndex}`)
 }
 
-function makeSuiteSlug(runIndex: number, suiteIndex: number): {id: string; link: string} {
+function makeSuiteSlug(runIndex: number, suiteIndex: number): { id: string; link: string } {
   // use prefix to avoid slug conflicts after escaping the paths
   return slug(`r${runIndex}s${suiteIndex}`)
 }
